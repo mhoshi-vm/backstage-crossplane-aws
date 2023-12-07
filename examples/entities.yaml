@@ -39,3 +39,14 @@ spec:
     message ExampleMessage {
       string example = 1;
     };
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: hello-tanzu-backstage
+  annotations:
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/part-of=ecs-test'
+spec:
+  type: service
+  lifecycle: unknown
+  owner: guests

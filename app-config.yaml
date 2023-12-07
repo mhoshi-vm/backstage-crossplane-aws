@@ -101,3 +101,26 @@ catalog:
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
     #   rules:
     #     - allow: [User, Group]
+kubernetes:
+  customResources:
+    - group: 'ecs.aws.upbound.io'
+      apiVersion: 'v1beta1'
+      plural: 'taskdefinitions'
+    - group: 'ecs.aws.upbound.io'
+      apiVersion: 'v1beta1'
+      plural: 'services'
+    - group: 'ec2.aws.upbound.io'
+      apiVersion: 'v1beta1'
+      plural: 'securitygroups'
+    - group: 'ec2.aws.upbound.io'
+      apiVersion: 'v1beta1'
+      plural: 'securitygrouprules'
+    - group: 'elbv2.aws.upbound.io'
+      apiVersion: 'v1beta1'
+      plural: 'lbtargetgroups'
+    - group: 'elbv2.aws.upbound.io'
+      apiVersion: 'v1beta1'
+      plural: 'lbs'
+    - group: 'elbv2.aws.upbound.io'
+      apiVersion: 'v1beta1'
+      plural: 'lblisteners'
