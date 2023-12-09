@@ -1,7 +1,7 @@
 import {Entity} from '@backstage/catalog-model';
 import React, {useEffect, useState} from "react";
 import {useKubernetesObjects} from "@backstage/plugin-kubernetes";
-import {Ecs, Resource, ResourceStatus, UpboundECSCrd} from "../../type";
+import {Ecs, Resource, ResourceStatus, UpboundAwsCrd} from "../../type";
 import {FetchResponse} from "@backstage/plugin-kubernetes-common";
 import {Content, Page, Progress, ResponseErrorPanel} from "@backstage/core-components";
 import {Grid} from "@material-ui/core";
@@ -45,7 +45,7 @@ export const CrossplaneAwsComponent = ({entity, refreshIntervalMs}: KubernetesCo
                 [...resources]
             ) ?? [];
 
-            const ecsCrds = flattenUpboundEcsAny as UpboundECSCrd[];
+            const ecsCrds = flattenUpboundEcsAny as UpboundAwsCrd[];
 
             for (let crdCnt = 0; crdCnt < ecsCrds.length; crdCnt++) {
 

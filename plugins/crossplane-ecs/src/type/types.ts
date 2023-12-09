@@ -22,7 +22,7 @@ export interface Condition {
     type: string
 }
 
-export interface UpboundECSCrd {
+export interface UpboundAwsCrd {
     apiVersion: string,
     kind: string,
     metadata: {
