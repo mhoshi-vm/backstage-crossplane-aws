@@ -53,25 +53,38 @@ export const CrossplaneAwsComponent = ({entity, refreshIntervalMs}: KubernetesCo
 
                 const kind = ecsCrds[crdCnt].kind
 
+
+                let externalName = ""
+                if (ecsCrds[crdCnt].status !== undefined && ecsCrds[crdCnt].status.atProvider.arn !== undefined && ecsCrds[crdCnt].status.atProvider.arn !== "") {
+                    externalName = ecsCrds[crdCnt].status.atProvider.arn
+                } else {
+                    externalName = ecsCrds[crdCnt].metadata.annotations["crossplane.io/external-name"]
+                }
+
                 const resource = {
                     name: ecsCrds[crdCnt].metadata.name,
-                    externalName: ecsCrds[crdCnt].metadata.annotations["crossplane.io/external-name"],
+                    externalName: externalName
                 } as ResourceStatus;
 
-                for (let condCnt = 0; condCnt < ecsCrds[crdCnt].status.conditions.length; condCnt++) {
-                    const condition = ecsCrds[crdCnt].status.conditions[condCnt];
-                    const type = condition.type;
-                    switch (type) {
-                        case ("Ready"):
-                            resource.ready = condition.status;
-                            break;
-                        case("Synced"):
-                            resource.synced = condition.status;
-                            break;
-                        default:
-                            break;
+
+                if (ecsCrds[crdCnt].status !== undefined) {
+
+                    for (let condCnt = 0; condCnt < ecsCrds[crdCnt].status.conditions.length; condCnt++) {
+                        const condition = ecsCrds[crdCnt].status.conditions[condCnt];
+                        const type = condition.type;
+                        switch (type) {
+                            case ("Ready"):
+                                resource.ready = condition.status;
+                                break;
+                            case("Synced"):
+                                resource.synced = condition.status;
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
+
 
                 let ecs = {} as Ecs;
                 const appIndex = ecss.findIndex(

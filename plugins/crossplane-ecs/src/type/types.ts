@@ -36,6 +36,9 @@ export interface UpboundAwsCrd {
     }
 
     status: {
+        atProvider: {
+           arn: string
+        }
         conditions: Condition[]
     }
 
